@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景图切换</title>
+    <style>
+        /*背景图片*/
+        .screenbg {
+            position:fixed;
+            bottom:0;
+            left:0;
+            z-index:-999;
+            overflow:hidden;
+            width:100%;
+            height:100%;
+        }
+
+        .screenbg img {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            opacity: 0;
+            height:100%;
+            z-index:-1000;
+            transition:all 4s;
+        }
+        .screenbg img:first-child{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div>自定义内容</div>
+    <div class="screenbg">
+        <img src='http://img.cmlt.fun/blog/wallhaven-vqy6d3_2560x1440.png'>
+        <img src='http://img.cmlt.fun/blog/wallhaven-yxg88x.jpg'>
+        <img src='http://img.cmlt.fun/blog/wallhaven-vqykvl_1920x1080.jpg'>
+    </div>
+    <script>
+        let imgs = document.querySelectorAll('.screenbg img')
+        console.log(imgs);
+
+        function change(index) {
+            imgs.forEach(function (li,i) {
+                if(i===index){
+                    imgs[i].style.opacity=1
+                }else{
+                    imgs[i].style.opacity=0
+                }
+            });
+        }
+
+        let index =0
+        function show() {
+            index ++;
+            if (index <= imgs.length - 1) {
+                change(index);
+            } else {
+                index = 0;
+                change(index);
+            }
+        }
+        let reBacTimer = setInterval(show, 3000);
+    </script>
+</body>
+</html>

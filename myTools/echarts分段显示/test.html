@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+        <div id="chart" style="width:800px;height:400px"></div>
+        <script src="./echarts.min.js"></script>
+        <script type="text/javascript">
+
+            var myChart = echarts.init(document.querySelector('#chart'));
+
+            let xarr = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            let yarr = [82.3,55,13,78,99,21,42]
+            let markLine  = {
+                "fatal_error": 0.100754224,
+                "warning": 10.099696111,
+                "error": 1.199622032
+            }
+
+            let option = {
+            tooltip: {trigger: "axis",},
+            legend: {
+                y: 'top',
+                selectedMode: false,
+                icon: "rect", // 图例icon为方块
+                itemHeight: 3, // 图例icon高度
+                itemWidth: 18, // 图例icon宽度
+                formatter: function(name) {
+                    switch(name){
+                    case 'data1':
+                        return '正常'
+                    case 'hide1':
+                        return '黄色预警'
+                    case 'hide2':
+                        return '橙色预警'
+                    case 'hide3':
+                        return '红色预警'
+                    default:
+                        return 'code error'
+                    }
+                },
+            },
+            grid: {
+                left: "5%",
+                right: "5%",
+                bottom: "3%",
+                top: 40,
+                containLabel: true,
+            },
+            xAxis: {
+                type: "category",
+                boundaryGap: false,
+                data: xarr,
+                axisLabel: {
+                    interval: 0, 
+                    rotate: 0,
+                },
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [{
+                name:'data1',
+                symbol:'none',
+                data: yarr,
+                type: "line",
+                itemStyle: {normal: {color: "#5470c6", lineStyle:{width:1}}}, //设置线条粗细
+                markLine: {   //警戒线
+                data: [      //存放警戒线配置
+                {
+                    yAxis: markLine['fatal_error'],
+                    lineStyle: {
+                    color: '#ff0000'
+                    },
+                    label: {
+                    color: '#ff0000',
+                    fontSize:10,
+                    formatter:(e)=>{return e.value}   //这里可以显示警戒线的值  也可使用字符串拼接，实现自己的值
+                    }
+                },
+
+                {
+                    yAxis: markLine["error"],
+                    lineStyle: {color: '#E28909'},
+                    label: {
+                    color: '#E28909',
+                    fontSize:10,
+                    formatter:(e)=>{return e.value}
+                    }
+                },
+                {
+                    yAxis: markLine["warning"],
+                    lineStyle: {color: '#E4C90C'},
+                    label: {
+                        color: '#E4C90C',
+                        fontSize:10,
+                        formatter:(e)=>{return e.value}
+                    }
+                },
+                ],
+                silent: false,//鼠标移入警戒线，警戒线会变粗
+                symbol:false,
+                lineStyle: {//警戒线的样式，颜色，宽度，类型
+                    color: 'red',
+                    type: 'dashed',//虚线
+                    width: 1
+                },
+                }
+            },
+            {name:'hide1',type: 'line',itemStyle: {normal: {color: "#E4C90C"}}}, //隐藏线条，用于图例显示黄色警戒线 注意没有数据
+            {name:'hide2',type: 'line',itemStyle: {normal: {color: "#E28909"}}}, //隐藏线条，用于图例显示橙色警戒线
+            {name:'hide3', type: 'line',itemStyle: {normal: {color: "#ff0000"}}},//隐藏线条，用于图例显示红色警戒线
+            ],
+            visualMap:{   //设置不同区段的折线段的颜色
+                pieces:[
+                    {
+                    lte: markLine["warning"],
+                    color:"#5470c6"
+                },
+                {
+                    gt: markLine["warning"],
+                    lte:markLine["error"],
+                    color:"#E4C90C"
+                },
+                {
+                    gt:markLine["error"],
+                    lte:89.64,
+                    color:"#E28909"
+                },
+                {
+                    gt: markLine["fatal_error"],
+                    color:"#ff0000"
+                },
+                ],
+                left:"center",//标签距离左边的距离，还可以用left。center等字段
+                top: "25",//标签距离顶部距离。还可以用top。middle等字段
+                orient: "horizontal",//标签排列方式，水平和垂直
+                show:false,//标签是否显示
+            },
+            }
+            
+            myChart.setOption(option);
+        </script>
+    </body>
+</html>

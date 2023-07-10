@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+  <script>
+    $.ajax({
+      method: 'GET',
+      url: 'http://www.liulongbin.top:3006/api/jsonp',
+      data: {
+        name: 'zs',
+        age: 20
+      },
+      success: function (res) {
+        console.log(res)   //拿不到请求数据会请求失败
+      }
+    })  
+  </script>
+</body>
+
+</html>

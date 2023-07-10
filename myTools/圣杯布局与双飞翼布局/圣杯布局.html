@@ -1,0 +1,80 @@
+<!-- 这是float实现的圣杯布局  现在都用flex了   用这个案例来理解 css的relative布局的位置关系（跟重要）特别是左右正负要缕清  -->
+<!-- 圣杯布局，为了中间div内容不被遮挡，将中间div设置了左右padding-left和padding-right后，将左右两个div用相对布局
+    position: relative并分别配合right和left属性，以便左右两栏div移动后不遮挡中间div。 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing:border-box;
+        }
+        main {
+          width: 100%;
+          padding: 39px 29px;
+          font-size: 12px;
+        }
+        section {
+          padding: 0 129px;   /*左右129的padding 就是留给左边两侧固定119大小的栏 */
+          box-shadow: 0 0 0 1px #eee;
+        }
+        section::after {
+          content: '';
+          display: block;
+          clear: both;
+        }          /* 其实这行写不写没影响 这是解决塌陷问题*/
+        section > div {
+          height: 229px;
+          padding: 29px 12px;
+          text-align: center;
+          float: left;
+          color: white;
+          background: #b4a078;
+        }
+        section .left, section .right {
+          position: relative;   /*相对定位 */ 
+          width: 119px;         /*这是写死的 两边固定 中间伸缩*/
+        }
+        section .left {
+          left: -129px;
+          margin-left: -100%;
+        }
+        section .center {
+          width: 100%;
+          text-align: justify;
+          hyphens: auto;
+        }
+        section .right {
+          left: 129px;
+          margin-left: -119px;
+        }
+        /* input range */
+        input[type="range"] {
+          width: 100%;
+          cursor: ew-resize;
+        }
+      </style>
+    
+</head>
+<body>
+    <main class="main">
+        <input type="range" value="100">
+        <section style="width:100%">
+          <div class="center">A paragraph of filler text. La la la de dah de dah de dah de la.</div>
+          <div class="left">left</div>
+          <div class="right">right</div>
+        </section>
+      </main>
+    <script>
+        let range = document.querySelector('input[type="range"]')
+        let sectionWidth = document.querySelector('section')
+        range.addEventListener('change',function() {
+            sectionWidth.style.width = `${60 + this.value * .4}%`;
+        })
+      </script>
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #angel {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./imgs/angel.gif" alt="" id="angel" />
+
+  <script>    
+    var angel = document.getElementById("angel");
+    var timer = null  //定义节流阀
+    addEventListener('mousemove',function(e){
+        if (timer) { return }
+        timer = setTimeout(function () {
+            angel.style.top = e.pageY + 'px'
+            angel.style.left = e.pageX + 'px'
+            console.log('ok')
+            timer = null
+        }, 16)
+    })
+  </script>
+</body>
+
+</html>

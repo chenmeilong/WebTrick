@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>懒加载实现</title>
+    <style>
+        .image{
+            height: 500px;
+            display: block;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 前面的是加载中的图像  后面是真实要加载的图片 -->
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/1.jpg" alt="">
+    <button id="button">dianwo</button>
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/2.jpg" alt="">
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/3.jpg" alt="">
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/4.jpg" alt="">
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/5.jpg" alt="">
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/6.jpg" alt="">
+    <img class="image" src="./imgs/replace.jpg" data-src="./imgs/7.jpg" alt="">
+    <script>
+        let num = document.getElementsByTagName("img").length //7
+        let img = document.getElementsByTagName("img")  //9个标签
+        let n = 0 
+        lazyLoad()
+        window.onscroll = lazyLoad;
+        function lazyLoad(){
+            let seeHeight = document.documentElement.clientHeight; //可见高度
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//卷去的距离  ocument.body.scrollTop一直是0？
+
+            for(let i = n; i<num;i++){
+                if(img[i].offsetTop < seeHeight + scrollTop){
+                    if(img[i].getAttribute("src") == "./imgs/replace.jpg"){
+                        img[i].src = img[i].getAttribute("data-src")
+                    }
+                    n = i+1
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>
