@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #myElement {
+        width: 200px;
+        height: 200px;
+        background-color: brown;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myElement"></div>
+    <script>
+      function animateElement() {
+        const element = document.getElementById("myElement");
+        let opacity = 0;
+        function fadeIn() {
+          opacity += 0.01;
+          element.style.opacity = opacity;
+          if (opacity < 1) {
+            // setTimeout(fadeIn, 10);
+            requestAnimationFrame(fadeIn);
+          }
+        }
+        // fadeIn();
+        requestAnimationFrame(fadeIn);
+      }
+        // 但使用setTimeout实现的动画效果可能不够平滑。
+        // 这是因为setTimeout的回调执行时机不一定都刚好在每次页面渲染前被执行。
+        // 对于复杂的动画效果，建议使用requestAnimationFrame来获得更好的性能和流畅性。
+      animateElement();
+    </script>
+  </body>
+</html>
