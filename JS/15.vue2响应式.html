@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+        <ul></ul>
+        <script>
+            // Object.defineProperty实现且触发set方法时更新视图
+            var ul = document.querySelector('ul');
+            var person = { sex: '男', age: '25', name: '王大锤', height: 28, weight: 32 };
+            const _render = element => {
+                var str = `<li>姓名：<span>${person.name}</span></li>
+                           <li>性别：<span>${person.sex}</span></li>
+                           <li>年龄：<span>${person.age}</span></li>
+                           <li>身高：<span>${person.height}</span></li>
+                           <li>体重：<span>${person.weight}</span></li>`
+                element.innerHTML = str;
+            }
+            _render(ul);
+            Object.keys(person).forEach(key =>{
+                let oldvalue = person[key]  //因为缓存，这里的oldvalue只是暂存
+                Object.defineProperty(person,key,{ 
+                    get(){ return oldvalue},  //取值的时候返回oldvalue
+                    set(value){ 
+                        oldvalue = value  //更新oldvalue
+                        _render(ul)
+                    }
+                })
+            })
+        </script>
+    </body>
+</html>
