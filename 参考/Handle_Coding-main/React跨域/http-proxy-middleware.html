@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //npm install http-proxy-middleware
+        //src目录下创建setupProxy.js文件
+        const proxy = require('http-proxy-middleware')
+
+        module.exports = function (app) {
+            //proxy第一个参数为要代理的路由
+            //第二个参数中target为代理后的网址，changeOrigin是否改变请求头
+            app.use(proxy('/cityjson', {
+                target: 'http://pv.sohu.com',
+                changeOrigin: true
+            }))
+        }
+
+    </script>
+</body>
+</html>

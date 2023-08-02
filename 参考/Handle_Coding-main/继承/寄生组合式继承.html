@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function js (son, par) {
+            var clone = Object.create(parent.prototype)
+            son.prototype = clone;
+            clone.constructor = son;
+        }
+
+        function pp (name) {
+            this.name = name;
+            this.type = ['js', 'html', 'css'];
+        } 
+
+        pp.prototype.say = function () {
+            console.log(this.name)
+        }
+
+        function Son (name) {
+            pp.call(this, name)
+        }
+
+        js(Son, pp);
+        //目前JS继承中使用的都是这个继承方法
+    </script>
+</body>
+</html>

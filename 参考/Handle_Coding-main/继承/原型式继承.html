@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        //优缺点和原型链类似
+      function fun(obj) {
+        function Son() {}
+        Son.prototype = obj;
+        return new Son();
+      }
+
+      var parent = {
+        name: "san",
+      };
+
+      var son1 = fun(parent);
+      var son2 = fun(parent);
+      console.log(son1.name);
+      console.log(son2.name);
+    </script>
+  </body>
+</html>

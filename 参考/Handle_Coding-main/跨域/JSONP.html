@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        同源指协议、域名、端口三者相同
+        同源策略限制以下几种行为：
+        Cookie、LocalStorage、IndexDB无法读取
+        DOM和JS对象无法获得
+        AJAX请求不能发送
+
+        JSONP利用<script>标签没有跨域限制，通过src属性发送带有callback的GET请求
+            服务端将端口返回数据拼凑到callback函数中，返回给浏览器解析执行
+        */
+            var script = document.createElement('script')
+            script.type = 'text/javascript'
+
+            script.src = 'http://www.domain2.com:8080/login?user=admin&callback=handleCallback';
+            document.head.appendChild(script)
+
+            function handleCallback (res) {
+                alert(JSON.stringify(res));
+            }
+
+            //jQuery Ajax实现
+            $.ajax({
+                url: 'http://ww.domain2.com:8080/login',
+                type: 'get',
+                dataType: 'jsonp',
+                jsonpCallback: "handleCallback",
+                data: {}
+            })
+
+            //Vue代码
+            this.$http = axios;
+            this.$http.jsonp('http: //www.domain2.com:8080/login', {
+                params: {},
+                jsonp: 'handleCallback'
+            }).then((res => console.log(res)))
+
+            //后端nodejs代码
+            var querystring = require('querystring');
+            var http = require('http')
+            var server = http.createServer();
+
+            server.on('request', function(req, res) {
+                var params = querystring.parse(req.url.split('?')[1]);
+
+                //jsonp返回设置
+                res.writeHead(200, {'Content-Type': 'text/javascript'});
+                res.write(fn + '(' + JSON.stringfy(params) + ')');
+                res.end();
+            })
+            server.listen('8080');
+            console.log("Server is running at port 8080...")
+    </script>
+</body>
+</html>

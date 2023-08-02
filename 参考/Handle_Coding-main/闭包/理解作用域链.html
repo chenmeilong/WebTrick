@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var name = "Yorn";
+      function showName() {
+        console.log(name);
+      }
+
+      function changeName() {
+        var name = "Yang";
+        showName();
+      }
+
+      changeName();
+
+      /*
+        词法作用域：JS查找是按照书写代码位置决定的
+        showName书写的时候name值为Yorn
+        最后控制台打印出Yorn
+
+        调用changeName并找到这个函数
+        定义var name = ”Yang“
+        调用showName()
+        changName中查找是否含有showName方法，没有就向外查找
+        调用console.log(name)，在函数内查找name，否则向上查找，name = ”Yorn"
+        输出Yorn
+        */
+    </script>
+  </body>
+</html>

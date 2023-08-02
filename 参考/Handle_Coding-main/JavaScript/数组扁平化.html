@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*数组扁平化*/
+        let arr = [
+            [1, 2, 2],
+            [3, 4, 5, 5],
+            [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10
+        ]
+
+        console.log(arr.flat(Infinity))
+        console.log(arr)
+        console.log(arr.toString())
+        console.log(arr.toString().split(','))
+        console.log(arr.toString().split(',').map(i => parseFloat(i)))
+        console.log(JSON.stringify(arr).replace(/(\[|\])/g, '').split(',').map(i => parseFloat(i)))
+        console.log(arr.toString().split(',').map(i => +i).reduce((curr, item) => curr += item))
+
+        function fb (n) {
+            let a = 0, b = 1, sum;
+            while(n--) {
+                sum = a + b;
+                a = b;
+                b = sum;
+            }
+            return a;
+        }
+        console.log(fb(1))
+        console.log(fb(2))
+        console.log(fb(3))
+        console.log(fb(4))
+        console.log(fb(5))
+    </script>
+</body>
+</html>

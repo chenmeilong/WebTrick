@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //无论什么情况下，都会调用两次父级构造函数，一次是在构建子级原型，一次是子级构造函数内部
+        function Parent (name) {
+            this.name = name;
+            this.type = ['JS', 'html']
+        }
+
+        Parent.prototype.Say = function () {
+            console.log(this.name)
+        }
+
+        function Son (name) {
+            Parent.call(this, name);
+        }
+
+        Son.prototype = new Parent();
+        son1 = new Son('san')
+        son2 = new Son('si')
+        son1.type.push(1)
+        son2.type.push(2)
+        console.log(son1.type)
+        console.log(son2.type)
+        son1.Say();
+        son2.Say();
+    </script>
+</body>
+</html>

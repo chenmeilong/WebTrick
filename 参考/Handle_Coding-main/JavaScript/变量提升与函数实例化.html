@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Foo () {
+            getName = function () {
+                console.log(1)
+            }
+            return this;
+        }
+
+        Foo.getName = function () {
+            console.log(2)
+        }
+
+        Foo.prototype.getName = function () {
+            console.log(3)
+        }
+
+        var getName = function () {
+            console.log(4)
+        }
+
+        function getName () {
+            console.log(5)
+        }
+
+        Foo.getName(); //2
+        getName();   //4
+        Foo().getName();  //1
+        getName();    //1 
+        new Foo.getName();  //2
+        new Foo().getName();   //3 
+        new new Foo().getName();    //3
+
+        /*
+        变量提升，带var和function都会提前声明定义
+        声明不赋值
+        普通函数执行和new函数执行是有区别的
+        普通函数执行行程一个EC stack，getName = function -> 1 会去上一层作用域寻找，并且将全局改为1
+        普通函数执行返回的this是一个window，window.getName执行
+        new带参数列表优先级高于无参数列表
+        Foo.getName func -> 2
+        new Foo创建实例，实例上的方法就是原型上的，fun -> 3
+        new Foo()创建一个实例 x => new x.getName()
+        没有小括号，所以先算成员访问，实例的方法都是调用原型上的方法
+        => new func -> 3
+        */
+    </script>
+</body>
+</html>

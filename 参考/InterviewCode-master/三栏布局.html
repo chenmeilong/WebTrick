@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>三栏布局</title>
+        <style>
+            .outer {
+                height: 200px;
+            }
+            .left {
+                width: 200px;
+                background-color: gray;
+                float: left;
+            }
+            .center {
+                background-color: green;
+                overflow: hidden;
+            }
+            .right {
+                width: 200px;
+                background-color: yellow;
+                float: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="outer">
+            <div class="left">left</div>
+            <div class="right">right</div>
+            <div class="center">center</div>
+        </div>
+    </body>
+</html>

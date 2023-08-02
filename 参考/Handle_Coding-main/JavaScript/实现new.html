@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        new运算符创建一个用户定义的对象类型的实例
+        或具有构造函数的内置对象类型之一
+        */
+
+        function peo (name, age) {
+            this.name = name;
+            this.age = age;
+            this.habit = 'Games';
+        }
+
+        peo.prototype.strength = 60;
+        peo.prototype.sayName = function () {
+            console.log('I am' + this.name)
+        }
+
+        var person = new peo('tom', 18);
+        console.log(person.name)
+        console.log(person.habit)
+        console.log(person.strength)
+        person.sayName();
+
+        function objFac() {
+            var obj = new Object(),
+            Constructor = [].shift.call(arguments);
+            obj.__proto__ = Constructor.prototype;
+            Constructor.apply(obj, arguments);
+            return obj;
+        }
+
+        /*
+        new Object()方式创建了一个对象obj
+        取出第一个参数，就是我们要传入的构造函数，shift会修改原数组，所以arguments会被去除第一个参数
+        将obj的原型指向构造函数，这样obj就可以访问到构造函数原型中的属性
+        使用apply改变构造函数this的指向到新建的对象，这样obj就可以访问到构造函数中的属性
+        返回obj
+        */
+
+        var per2 = objFac(peo, 'jerry', 20)
+        console.log(per2.name)
+        console.log(per2.habit)
+        console.log(per2.strength)
+        per2.sayName()
+
+        function p2 (name, age) {
+            this.strength = 90;
+            this.age = age;
+            return {
+                name: name,
+                habit: 'Games'
+            }
+        }
+
+        var p0 = new p2('morty', 12);
+        console.log(p0.name)
+        console.log(p0.age)
+        console.log(p0.strength)
+        console.log(p0.habit)
+    </script>
+</body>
+</html>

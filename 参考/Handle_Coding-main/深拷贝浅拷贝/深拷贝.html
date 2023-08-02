@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj = {
+        a: 100,
+        b: [10, 20, 30],
+        c: {
+          x: 10,
+        },
+        d: /^\d+$/,
+        function () {
+            console.log(1)
+        }
+      };
+
+      //ES6浅拷贝
+
+      let obj0 = {
+          ...obj
+      }
+
+      let obj2 = {};
+      for(let key in obj) {
+          if(!obj.hasOwnProperty(key)) break;
+          obj2[key] = obj[key];
+      }
+      console.log(obj, obj2, obj0)
+      console.log(obj === obj2)
+      obj2.c.x = 1000;
+      console.log(obj.c.x)
+
+
+      let obj3 = JSON.parse(JSON.stringify(obj));//正则、函数、对象都会出现问题,其余变成字符串
+      console.log("obj3", obj3)
+
+      //实现深克隆
+      function deepClone (obj) {
+          if(obj === null) return null;
+          if(typeof obj !== "object") return obj;
+          if(obj instanceof RegExp) {
+              return new RegExp(obj)
+          }
+          let newObj = new obj.constructor; //如果传入的是一个实例，那么久克隆它的另外一个实例，克隆结果和之前的保持相同的类
+          for(let key in obj) {
+              if(obj.hasOwnProperty(key)) {
+                newObj[key] = deepClone(obj[key]);
+              }
+          }
+          return newObj;
+      }
+
+      const obj4 = deepClone(obj)
+      console.log(obj4)
+      console.log(obj4 === obj)
+      console.log(obj4.c === obj.c)
+      let arr = [
+        10,
+        [100, 200],
+        {
+          x: 10,
+          y: 20,
+        },
+      ];
+    </script>
+  </body>
+</html>

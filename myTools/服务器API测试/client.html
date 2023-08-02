@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.js"></script>
+</head>
+<body>
+    <ul id="ul">
+    </ul>
+    <script>
+        let ul = document.getElementById('ul')
+        axios({
+            method:'POST',
+            url:'http://120.53.84.79:8887/image',
+            data:{
+                index:0,
+            },
+        }).then(function (res){
+            console.log(res.data);
+            let li = document.createElement('li')
+            let img = document.createElement('img')
+            img.src = res.data.data.img
+            li.appendChild(img)
+            ul.appendChild(li)
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function component () {
+            this.id = Math.random().toString(36).slice(-5)
+            Object.defineProperty(this, 'id', {
+                writable: false
+            })
+        }
+
+        const com = new component();
+        com.id = 3;
+        console.log(com.id)
+
+        class cc {
+            constructor () {
+                this.id = Math.random().toString(36).slice(-5);
+                Object.defineProperty(this, 'id', {
+                    writable: false
+                })
+            }
+        }
+
+        const comm = new cc()
+        comm.id = 3
+        console.log(comm.id)
+    </script>
+</body>
+</html>

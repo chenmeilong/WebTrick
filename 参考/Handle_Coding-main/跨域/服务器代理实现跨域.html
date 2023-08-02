@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        基于http proxy实现跨域请求
+        nginx反向代理
+        */
+       let arr = [1,1,2,3,4445,4445,3,7,7,8]
+       console.log(new Set(arr))
+
+       const qs = (arr) => {
+           if (arr.length <= 1) return arr;
+            const [pivot, ...rest] = arr;
+            const small = rest.filter(item => item <= pivot);
+            const big = rest.filter(item => item >= pivot);
+            return [...qs(small), pivot, ...qs(big)];
+       }
+       console.log(qs([9,0,1,3,1,8,2,9,10,1]))
+
+       const wq = (arr, next) => {
+           if(arr.length <= 1) return next(arr);
+           const [pivot, ...rest] = arr;
+           const small = rest.filter(i => i <= pivot);
+           const big = rest.filter(i => i >= pivot);
+           wq(small, sortedSmall => {
+               wq(big, sortedBig => {
+                   next([...sortedSmall, pivot, ...sortedBig]);
+               })
+           })
+       }
+       console.log(wq([9,0,1,3,1,8,2,9,10,1]))
+
+    </script>
+</body>
+</html>

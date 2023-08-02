@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        闭包概念：
+        当一个变量既不是该函数内部的局部变量，也不是该函数的参数
+        相对于作用于来说就是一个自由变量，就会形成一个闭包
+        */
+      let count = 500;
+      function foo1() {
+        let count = 0;
+        function foo2() {
+          let count2 = 1;
+          debugger;
+        }
+        return foo2;
+      }
+      let res = foo1();
+      res(); //1
+      res(); //2
+
+      //循环闭包
+      for (var i = 1; i <= 5; i++) {
+        setTimeout(function timer() {
+          debugger;
+          console.log(i);
+        }, 1000);
+      }
+
+      /*
+       setTimeout的回到函数是一个异步的过程
+       for循环是同步的，立即执行
+       异步的setTimeout必须等待一秒才能执行，这时i已经循环结束
+       控制台打印五次6
+       */
+    </script>
+  </body>
+</html>

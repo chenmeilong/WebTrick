@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fun(obj) {
+        function Son() {}
+        Son.prototype = obj;
+        return new Son();
+      }
+
+      function jiSheng(obj) {
+        var clone = fun(obj);
+        clone.Say = function () {
+          console.log("new add func");
+        };
+        return clone;
+      }
+
+      var parent = {
+        name: "san",
+      };
+
+      var parent1 = jiSheng(parent);
+      var parent2 = jiSheng(parent);
+      console.log(parent2.Say == parent1.Say);
+
+      /*
+        优缺点：跟构造函数继承类似，调用一次函数就得创建一遍方法，无法实现函数复用，效率较低
+        这里补充一个知识点，ES5有一个新的方法Object.create()，这个方法相当于封装了原型式继承。
+        这个方法可以接收两个参数：第一个是新对象的原型对象（可选的），第二个是新对象新增属性，
+        所以上面代码还可以这样：
+        */
+
+        function js (obj) {
+            var clone = Object.create(obj);
+            clone.say = function () {
+                console.log('new new add')
+            }
+            return clone;
+        }
+
+        var par = {
+            name: 'sss'
+        }
+
+        var p1 = js(par)
+        var p2 = js(par)
+        console.log(p1.say === p2.say)
+    </script>
+  </body>
+</html>

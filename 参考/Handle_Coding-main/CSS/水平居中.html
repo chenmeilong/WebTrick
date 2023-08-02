@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .father {
+      box-sizing: border-box;
+      width: 100px;
+      height: 50px;
+      line-height: 48px;
+      text-align: center;
+      font-size: 16px;
+      border: 1px solid lightblue;
+      background: lightcyan;
+    }
+    /*定位*/
+      /* body {
+        position: relative;
+        height: 100px;
+        width: 100px;
+      } */
+
+    /* .father{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -25px;
+        margin-left: -50px;
+    } */
+
+    /* .father{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    } */
+
+    /* .father{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    } */
+
+    /* body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+    body{ 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <body>
+    <div class="box" id="box">???</div>
+    <script>
+      /*
+        1.定位：三种
+        2.display flex
+        3.JavaScript
+        4.display table-cell
+        这种事在我之前项目很常见，后期使用flex比较多
+        table-cell不常用但是也可以实现
+        */
+      let HTML = document.documentElement,
+        winW = HTML.clientWidth,
+        winH = HTML.clientHeight,
+        boxW = box.offsetWidth,
+        boxH = box.offsetHeight;
+
+      box.style.position = "absolute";
+      box.style.left = (winW - boxW) / 2 + "px";
+      box.style.top = (winH - boxH) / 2 + "px";
+    </script>
+  </body>
+</html>

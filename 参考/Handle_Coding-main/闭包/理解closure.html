@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let count = 500;
+      function foo1() {
+        let count = 0;
+        function foo2() {
+          count++;
+          console.log(count);
+          return count;
+        }
+        return foo2;
+      }
+
+      let res = foo1();
+      res(); //1
+      res(); //2
+      /*
+        Chrome点击resources可以看到closure，
+        并且count = 1 已经存储在closure中，
+        即是说明count = 1 没有被销毁
+        */
+    </script>
+  </body>
+</html>

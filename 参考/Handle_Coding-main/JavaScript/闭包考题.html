@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var test = (function (i) {
+        return function () {
+          alert((i *= 2)); //alert输出字符串'6'
+        };
+      })(3); //立即执行自定义函数#
+      //函数创建了紧接着又执行了，test等于函数执行返回的那个函数
+      //函数执行会有执行上下文 alert(i *= 2)
+      //并没有i，所以去上级作用域寻找i
+      //内存回收机制销毁，一旦没有被引用，执行上下文i = 2不销毁称为闭包
+      //大函数执行形成了闭包，小函数执行并没有，闭包保留了变量
+      test(5);
+      console.log(test(0));
+
+      var a = 0,
+          b = 0;
+      function A(a) {
+        A = function (b) {
+          console.log(a + b++);
+        };
+        console.log(a++);
+      }
+      A(1);//函数执行会形成一个新的执行上下文
+      //形参a赋值为1， A赋值一个函数，相当于把全局作用域下的A重写
+      //重新赋值地址后，占用了新的空间，不销毁，形成了闭包
+      A(2);
+    </script>
+  </body>
+</html>

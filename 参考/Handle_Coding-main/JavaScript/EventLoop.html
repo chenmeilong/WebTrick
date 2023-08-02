@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function async1 () {
+            console.log('async1 start')
+            await async2();
+            console.log('async1 end')
+        }
+
+        async function async2 () {
+            console.log('async2')
+        }
+
+        console.log('script start')
+
+        setTimeout(function() {
+            console.log('setTimeout')
+        }, 0)
+        async1();
+        
+        new Promise(function (resolve) {
+            console.log('promise1')
+            resolve();
+        }).then(function () {
+            console.log('promise2')
+        })
+        console.log('script end')
+        /*
+        JS中对异步的管理
+        浏览器是多线程的
+        Event Queue:
+        分为微任务队列和宏任务队列
+        主线程代码执行完之后先执行微任务，没有微任务再执行宏任务
+        1.script start
+
+        2.设置一个定时器，宏任务A：0，0代表浏览器最小反应时间
+        
+        3.-> async1 start
+        await async2 执行async2，等待返回的结果，微任务B
+
+        4.-> async2 此时微任务B在等待async2的返回结果，有结果再继续执行下面代码
+        new Promise的时候会立即执行executor函数
+
+        5.-> promise1
+        resoleve()/reject()微任务C
+        resolve或者reject执行的时候把then/catch中的方法执行
+
+        6.-> script end 主栈完成
+        有微任务就永远不执行宏任务
+
+        7.-> async1 end
+
+        8.->promise2
+
+        9.setTimeout
+        定时器，事件绑定,ajax属于宏任务
+        promise，async await属于微任务
+        */
+    </script>
+</body>
+</html>

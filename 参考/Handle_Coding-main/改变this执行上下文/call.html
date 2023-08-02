@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var person = {
+            fullName: function (txt) {
+                console.log(txt + this.firstName + " " + this.lastName)
+            }
+        }
+
+        var person1 = {
+            firstName: "John",
+            lastName: "boe"
+        }
+
+        person.fullName.call(person1, "hello, ")
+
+        Function.prototype.myCall = function (context) {
+            context = context || window;
+            context.fn = this;
+
+            var args = [];
+            for(let i = 0; i < arguments.length; i++) {
+                args.push("arguments[" + i + "]");
+            }
+
+            //eval函数可以计算传入的字符串，然后执行其中的JS代码
+            var res = eval("context.fn(" + args + ")");
+            delete context.fn;
+            return res;
+        }
+
+        person.fullName.myCall(person1, "hello, ")
+    </script>
+</body>
+</html>

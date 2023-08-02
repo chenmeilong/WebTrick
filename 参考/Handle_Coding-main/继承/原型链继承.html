@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //原型链继承无法传递参数
+        function Parent() {
+            this.name = 'web'
+            this.type = ['JS', "HTMl"]
+        }
+
+        Parent.prototype.Say = function() {
+            console.log(this.name)
+        }
+
+        function Son() {};
+        Son.prototype = new Parent();
+        son1 = new Son();
+        son1.Say();
+    </script>
+</body>
+</html>
