@@ -18,13 +18,13 @@
       function animateElement() {
         const element = document.getElementById("myElement");
         let opacity = 0;
+        // 递归调用
         function fadeIn() {
+          if (opacity > 1) return
           opacity += 0.01;
           element.style.opacity = opacity;
-          if (opacity < 1) {
-            // setTimeout(fadeIn, 10);
-            requestAnimationFrame(fadeIn);
-          }
+          // setTimeout(fadeIn, 10);
+          requestAnimationFrame(fadeIn);
         }
         // fadeIn();
         requestAnimationFrame(fadeIn);

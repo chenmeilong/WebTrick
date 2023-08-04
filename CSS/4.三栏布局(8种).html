@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>CSS实现三栏布局——Flex</title>
+		<style type="text/css">
+            /* 方法1 浮动+BFC 和两栏比较法一很像，左右元素固定宽度，向左右浮动 中间元素不设置宽度，会自动撑满，重叠问题可使用BFC解决 */
+            /* 注意HTML标签中需要将 中间元素放在最后显示，这会导致问题，中间内容后显示 */
+            /* .left{
+                float: left;
+                width: 100px;
+                background-color: aqua;
+            }
+            .middle{
+                overflow: hidden;
+                height: 200px;
+                background-color: green;
+            }
+            .right{
+                float: right;
+                width: 100px;
+                background-color: aqua;
+            } */
+
+            /* 方法2 浮动+margin 和两栏比较法二很像，左右元素固定宽度，向左右浮动 中间元素不设置宽度，会自动撑满，重叠问题可使用margin解决 */
+            /* 注意HTML标签中需要将 中间元素放在最后显示，这会导致问题，中间内容后显示 */
+            /* .left{
+                float: left;
+                width: 100px;
+                background-color: aqua;
+            }
+            .middle{
+                margin:0 100px;
+                height: 200px;
+                background-color: green;
+            }
+            .right{
+                float: right;
+                width: 100px;
+                background-color: aqua;
+            } */
+
+            /* 方法3 浮动+calc() 先使用浮动将三栏水平排列，然后对中间栏使用calc()函数来计算去除左右两栏固定宽度后剩余的宽度。*/
+            /* div {
+                height: 100px;
+            }
+            .left {
+                float: left;
+                width: 200px;
+                background-color: red;
+            }
+            .middle {
+                float: left;
+                width: calc(100% - 400px);
+                background-color: green;
+            }
+            .right {
+                float: right;
+                width: 200px;
+                background-color: blue;
+            } */
+
+            /* 方法4 flex 直接给中间设置flex 1 左右固定跨度 */
+            /* 优点是特别简单 */
+			/* .container {
+				display: flex;
+			}
+			.left {
+				width: 200px;
+				height: 200px;
+				background: red;
+			}
+			.middle {
+				height: 200px;
+				background: yellow;
+				flex: 1;
+			}
+			.right {
+				width: 200px;
+				height: 200px;
+				background: blue;
+			} */
+
+            /* 方法5 网格 利用grid布局的方式，左右两栏设置固定宽度，中间一栏设置为auto*/
+            /* 核心代码：grid-template-columns 左右两栏固定宽度，中间自适应宽度 */
+            /* div {
+                height: 100px;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: 200px auto 200px;
+            }
+            .left {
+                background: red;
+            }
+            .middle {
+                background: green;
+            }
+            .right {
+                background: blue;
+            } */
+
+            /* 方法6 子绝父相：三栏全部绝对定位；中间栏left: 200px;right: 200px;保持伸缩居中 */
+            /* .container {
+                position: relative;
+            }
+            .left {
+                position: absolute;
+                left: 0;
+                width: 200px;
+                background-color: red;
+            }
+            .middle {
+                position: absolute;
+                left: 200px;
+                right: 200px;
+                background-color: green;
+            }
+            .right {
+                position: absolute;
+                right: 0;
+                width: 200px;
+                background-color: blue;
+            } */
+
+            /* 剩下的两种为 圣杯布局和双飞翼布局 */
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="left">左栏</div>
+			<div class="middle">中间栏</div>
+			<div class="right">右栏</div>
+		</div>
+	</body>
+</html>

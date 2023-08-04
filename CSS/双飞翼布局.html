@@ -14,14 +14,6 @@
         *{
             box-sizing: border-box;
         }
-        main {
-          width: 100%;
-          padding: 39px 29px;
-          font-size: 12px;
-        }
-        section {
-          box-shadow: 0 0 0 1px #eee;
-        }
         section::after {
           content: '';
           display: block;
@@ -35,7 +27,6 @@
         }
         section .left, section .right {
           width: 119px;
-          padding-top: 29px;
           background: #b4a078;
         }
         section .left {
@@ -63,22 +54,12 @@
       </style>
 </head>
 <body>
-    <main class="main">
-        <input type="range" value="100">
-        <section style="width : 100%">
-          <div class="center">
-            <div class="center-inner">A paragraph of filler text. La la la de dah de dah de dah de la.</div>
-          </div>
-          <div class="left">left</div>
-          <div class="right">right</div>
-        </section>
-      </main>
-      <script>
-            let range = document.querySelector('input[type="range"]')
-            let sectionWidth = document.querySelector('section')
-            range.addEventListener('change',function() {
-                sectionWidth.style.width = `${60 + this.value * .4}%`;
-            })
-      </script>
+    <section style="width : 100%">
+      <div class="center">
+        <div class="center-inner">A paragraph of filler text. La la la de dah de dah de dah de la.</div>
+      </div>
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </section>
 </body>
 </html>

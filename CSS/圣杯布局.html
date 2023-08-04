@@ -12,11 +12,7 @@
         * {
             box-sizing:border-box;
         }
-        main {
-          width: 100%;
-          padding: 39px 29px;
-          font-size: 12px;
-        }
+
         section {
           padding: 0 129px;   /*左右129的padding 就是留给左边两侧固定119大小的栏 */
           box-shadow: 0 0 0 1px #eee;
@@ -60,21 +56,11 @@
     
 </head>
 <body>
-    <main class="main">
-        <input type="range" value="100">
-        <section style="width:100%">
-          <div class="center">A paragraph of filler text. La la la de dah de dah de dah de la.</div>
-          <div class="left">left</div>
-          <div class="right">right</div>
-        </section>
-      </main>
-    <script>
-        let range = document.querySelector('input[type="range"]')
-        let sectionWidth = document.querySelector('section')
-        range.addEventListener('change',function() {
-            sectionWidth.style.width = `${60 + this.value * .4}%`;
-        })
-      </script>
+    <section>
+      <div class="center">A paragraph of filler text. La la la de dah de dah de dah de la.</div>
+      <div class="left">left</div>
+      <div class="right">right</div>
+    </section>
 </body>
 </html>
 

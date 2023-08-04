@@ -21,9 +21,10 @@
 
 <body>
   <img src="./imgs/angel.gif" alt="" id="angel" />
-
   <script>    
     var angel = document.getElementById("angel");
+    // 分为定时器和时间戳两种方式，一般防抖节流都是使用lodash工具函数实现
+    // 节流：如果事件被频繁触发，节流能能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！
     var timer = null  //定义节流阀
     addEventListener('mousemove',function(e){
         if (timer) { return }
@@ -34,6 +35,7 @@
             timer = null
         }, 16)
     })
+
   </script>
 </body>
 

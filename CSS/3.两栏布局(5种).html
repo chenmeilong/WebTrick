@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>两栏布局</title>
+        <style>
+            /* 方法1  左元素固定宽度，向左浮动 右元素不设置宽度，会自动撑满，重叠问题可使用BFC解决 */
+            /* float让元素脱离正常标准流控制，不再占有原来的位置，*/
+            /* overflow: hidden是关键，也可改成其他能触发BFC均可解决 利用了BFC的特点：`BFC` 的区域不会与浮动元素发生重叠 */
+			/* .left {
+                width: 200px;
+                height: 100px;
+                background-color: red;
+                float:left;
+            }
+            .right {
+                height: 200px;
+                background-color: blue;
+                overflow: hidden;
+            } */
+			/* 方法2  左元素固定宽度，向左浮动 右元素不设置宽度，会自动撑满，使用margin-left */
+			.left {
+                width: 200px;
+                height: 100px;
+                background-color: red;
+                float:left;
+            }
+            .right {
+                height: 200px;
+                background-color: blue;
+                margin-left: 200px;
+            }
+
+            /* 方法3 利用 `flex` 布局，左边元素固定宽度，右边的元素设置 `flex: 1` */
+			/* .outer {
+				display: flex;
+			}
+			.left {
+				width: 200px;
+				height: 100px;
+				background: lightcoral;
+			}
+			.right {
+				flex: 1;
+				height: 200px;
+				background: lightseagreen;
+			} */
+
+            /* 方法4 */
+		    /* 利用绝对定位，父级元素设为相对定位。左边元素 `absolute` 定位，宽度固定。
+            右边元素的 `margin-left` 的值设为左边元素的宽度值。 */
+			/* .outer {
+				position: relative;
+			}
+			.left {
+				position: absolute;
+				width: 200px;
+				height: 100px;
+				background: lightcoral;
+			}
+			.right {
+				margin-left: 200px;
+				height: 200px;
+				background: lightseagreen;
+			} */
+
+            /* 方法5 */
+            /* 利用绝对定位，父级元素设为相对定位。左边元素宽度固定，
+            右边元素 `absolute` 定位， `left` 为宽度大小，其余方向定位为 `0` 。 
+            也可以只设置left+top，但要记得设置宽高*/
+			/* .outer {
+				position: relative;
+			}
+			.left {
+				width: 200px;
+				height: 100px;
+				background: lightcoral;
+			}
+			.right {
+				position: absolute;
+				left: 200px;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				height: 200px;
+				background: lightseagreen;
+			} */
+
+        </style>
+    </head>
+    <body >
+		<div class="outer">
+			<div class="left">左侧</div>
+			<div class="right">右侧</div>
+		</div>
+    </body>
+</html>

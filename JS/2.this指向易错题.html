@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="button">点击</button>
+
+  <script>
+    let btn = document.querySelector('#button')
+    function test() {
+      this.flag = false;
+      this.change = () => {
+        this.flag = true;
+        console.log(button.flag);
+        console.log(this)   //这里的this指向点击的test对象 
+      };
+
+    //   this.change = function() {
+    //     this.flag = true;
+    //     console.log(button.flag);
+    //     // 事件的this是事件源
+    //     console.log(this)   //这里的this指向点击的document  btn 对象
+    //   }
+    }
+
+    // let aaa = function(){
+    //   this.flag = true;
+    //     console.log(button.flag);
+    //     console.log(this)  //这里的this指向点击的 btn 对象
+    // }
+
+    const button = new test();
+    // button.change()
+    btn.addEventListener("click", button.change); //传入的是个函数  其实这个函数的 this指向windows
+
+  </script>
+</body>
+</html>
