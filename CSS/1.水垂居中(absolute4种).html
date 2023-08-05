@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 公共代码 */
+        .wp {
+            border: 1px solid red;
+            width: 300px;
+            height: 300px;
+        }
+
+        .box {
+            background: green;    
+        }
+
+        .box.size{
+            width: 100px;
+            height: 100px;
+        }
+        /* 公共代码 */
+
+
+        /* 方法一 absolute+负margin  常用、兼容性好。缺点是要知道子元素的宽高 */
+        /* .wp {
+            position: relative;
+        }
+        .box {
+            position: absolute;;
+            top: 50%;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+        } */
+        
+        /* 方法二 absolute + margin auto  兼容性好。缺点是要知道子元素的宽高*/
+        /* .wp {
+            position: relative;
+        }
+        .box {
+            position: absolute;;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        } */
+
+        /* 方法三 absolute + calc  兼容性依赖calc的兼容性，缺点是要知道子元素的宽高*/
+        /* .wp {
+            position: relative;
+        }
+        .box {
+            position: absolute;;
+            top: calc(50% - 50px);
+            left: calc(50% - 50px);
+        } */
+        /* 方法四 absolute + transform 兼容性依赖translate2d的兼容性，不需要知道子元素的宽高 */
+        .wp {
+            position: relative;
+        }
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="wp">
+        <div class="box size">123123</div>
+    </div>    
+</body>
+</html>
