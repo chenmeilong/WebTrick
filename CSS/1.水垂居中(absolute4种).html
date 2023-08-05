@@ -36,7 +36,7 @@
         } */
         
         /* 方法二 absolute + margin auto  兼容性好。缺点是要知道子元素的宽高*/
-        /* .wp {
+        .wp {
             position: relative;
         }
         .box {
@@ -46,7 +46,7 @@
             right: 0;
             bottom: 0;
             margin: auto;
-        } */
+        }
 
         /* 方法三 absolute + calc  兼容性依赖calc的兼容性，缺点是要知道子元素的宽高*/
         /* .wp {
@@ -58,7 +58,7 @@
             left: calc(50% - 50px);
         } */
         /* 方法四 absolute + transform 兼容性依赖translate2d的兼容性，不需要知道子元素的宽高 */
-        .wp {
+        /* .wp {
             position: relative;
         }
         .box {
@@ -66,7 +66,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-        }
+        } */
     </style>
 </head>
 <body>

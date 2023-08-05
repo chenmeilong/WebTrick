@@ -21,7 +21,7 @@
                 overflow: hidden;
             } */
 			/* 方法2  左元素固定宽度，向左浮动 右元素不设置宽度，会自动撑满，使用margin-left */
-			.left {
+			/* .left {
                 width: 200px;
                 height: 100px;
                 background-color: red;
@@ -31,7 +31,7 @@
                 height: 200px;
                 background-color: blue;
                 margin-left: 200px;
-            }
+            } */
 
             /* 方法3 利用 `flex` 布局，左边元素固定宽度，右边的元素设置 `flex: 1` */
 			/* .outer {
@@ -51,7 +51,7 @@
             /* 方法4 */
 		    /* 利用绝对定位，父级元素设为相对定位。左边元素 `absolute` 定位，宽度固定。
             右边元素的 `margin-left` 的值设为左边元素的宽度值。 */
-			/* .outer {
+			.outer {
 				position: relative;
 			}
 			.left {
@@ -64,7 +64,7 @@
 				margin-left: 200px;
 				height: 200px;
 				background: lightseagreen;
-			} */
+			}
 
             /* 方法5 */
             /* 利用绝对定位，父级元素设为相对定位。左边元素宽度固定，
