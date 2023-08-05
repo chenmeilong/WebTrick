@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+        }
+        /* 给container栏添加padding，左右栏使用绝对定位移上去。利用浮动，外边距负值和相对定位来实现。 */
+        .container {
+            height: 100px;
+            padding: 0 200px;
+        }
+        .middle,.left,.right{
+            float: left;
+            height: 100%;
+        }
+        .middle {
+            width: 100%;
+            background: rgb(100, 105, 100);
+        }
+        .left {
+            position: relative;
+            width: 200px;
+            background: pink;
+            left: -200px;
+            /* float后的元素可以使用 margin-left: -100%; 切换到上一行起始位置*/
+            margin-left: -100%;
+        }
+        .right {
+            position: relative;
+            width: 200px;
+            background: pink;
+            /* 第一种写法 */
+            margin-left: -200px;
+            left:200px;
+            /* 第二中写法 */
+            /* margin-right: -200px; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="middle">middle</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+</body>
+</html>

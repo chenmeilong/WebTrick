@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 双飞翼与圣杯布局的结合写法，这一种直接在中间栏加padding，然后将左右栏 添加margin-left移动上去 */
+        /* middle要使用内减模式 不然会多出一块区域 */
+        .container {
+            height: 100px;
+        }
+        .middle,.left,.right{
+            float: left;
+            height: 100%;
+        }
+        .middle {
+            box-sizing: border-box;
+            width: 100%;
+            background: rgb(100, 105, 100);
+            padding: 0 200px;
+        }
+        .left {
+            width: 200px;
+            background: pink;
+            margin-left: -100%;
+        }
+        .right {
+            width: 200px;
+            background: pink;
+            margin-left: -200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="middle">middle</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+</body>
+</html>

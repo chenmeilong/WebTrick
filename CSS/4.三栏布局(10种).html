@@ -124,7 +124,27 @@
                 background-color: blue;
             } */
 
-            /* 剩下的两种为 圣杯布局和双飞翼布局 */
+            
+            /* 方法7:使用flex实现圣杯、双飞翼的效果, 使用 order 调整flex顺序  使中间块最先加载*/
+            .container {
+            display: flex;
+            }
+            .middle {
+            flex: 1;
+            background-color: red;
+            }
+            .left {
+            width: 200px;
+            order: -1;
+            background-color: aqua;
+            }
+            .right {
+            width: 200px;
+            order: 1;
+            background-color: bisque;
+            }
+
+            /* 剩下的三种为 圣杯布局、双飞翼布局、圣杯+双飞翼布局 */
 		</style>
 	</head>
 	<body>

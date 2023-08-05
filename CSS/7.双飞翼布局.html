@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            overflow: hidden;
+            height: 200px;
+        }
+        /* 中间栏的子标签margin+左右负边距 */
+        .middle,.left,.right {
+            float: left;
+            height: 100px;
+        }
+        .middle {
+            width: 100%;
+            background-color: aqua;
+        }
+        .inner {
+            margin: 0 200px;
+            height: 100px;
+            background-color: green;
+        }
+        .left {
+            width: 200px;
+            margin-left: -100%;
+            background-color: red;
+        }
+        .right {
+            width: 200px;
+            margin-left: -200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="middle">
+            <div class="inner">中间</div>
+        </div>
+        <div class="left">左边</div>
+        <div class="right">右边</div>
+    </div>
+</body>
+</html>
