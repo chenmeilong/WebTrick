@@ -7,6 +7,7 @@
 </head>
 <body>
     <script>
+        // 1.只能get 2.不安全3.有缓存4.传递信息有限制
         let script = document.createElement('script')
         script.src = 'http://localhost:4433/api/test?callback=func'
         document.body.appendChild(script)

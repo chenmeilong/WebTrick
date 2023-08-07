@@ -17,6 +17,7 @@ function randomRequest(url){
     })
   }
 
+// 稍微修改下可以改为异步任务调度器
 // 并发请求函数
 const controlAsync = (urls, maxNum) => {
     return new Promise((resolve) => {
