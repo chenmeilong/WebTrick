@@ -1,10 +1,7 @@
-// new实现
-
-function myNew(context) {
+function myNew(context,...args) {
     const obj = new Object();
-    console.log(context);
     obj.__proto__ = context.prototype;
-    const res = context.apply(obj, [...arguments].slice(1));
+    const res = context.apply(obj, args);
     return typeof res === "object" ? res : obj;
 }
 
