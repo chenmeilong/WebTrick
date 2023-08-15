@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title></title>
+    </head>
+    <body>
+        <script src="./reactive.js"></script>
+        <script>
+            const obj = reactive({
+                name: 'miles',
+                age: 22,
+            })
+
+            const { name, age } = toRefs(obj)
+            console.log(obj)
+            name.value = 'miles'
+            age.value = 21
+            console.log(obj)
+        </script>
+    </body>
+</html>

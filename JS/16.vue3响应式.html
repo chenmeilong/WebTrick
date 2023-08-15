@@ -1,2 +1,33 @@
 <!-- 待整理 -->
 <!-- 见vue八股 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="message"></div>
+    <script>
+        const obj = {};
+        const handler = {
+            get(tartget, key) {
+                // console.log(`getting ${key}`);
+                // Proxy配合Reflect实现的响应式
+                // eflect是ES6出现的新特性，代码运行期间用来设置或获取对象成员，代替原始的操作，更加安全
+                return Reflect.get(target,key)
+            },
+            set(tartget, key, value) {
+                // console.log(`setting ${key} to ${value}`);
+                Reflect.set(tartget,key,value);
+                document.getElementById('message').innerText = value
+            },
+        };
+        const proxy = new Proxy(obj, handler);
+        proxy.message = "hello";
+        proxy.message = "hi";
+    </script>
+</body>
+</html>

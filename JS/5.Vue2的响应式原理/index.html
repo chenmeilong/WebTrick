@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      {{msg}} <br />
+      {{age}} <br />
+      <div v-text="msg"></div>
+      <input v-model="msg" type="text" />
+    </div>
+    <script src="./js/dep.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script src="./js/compiler.js"></script>
+    <script src="./js/observer.js"></script>
+    <script src="./js/vue.js"></script>
+    <script>
+      let vm = new Vue({
+        el: '#app',
+        data: {
+          msg: '123',
+          age: 21,
+        },
+      })
+    </script>
+  </body>
+  
+</html>
