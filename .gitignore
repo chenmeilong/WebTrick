@@ -1,0 +1,8 @@
+.vscode
+.idea
+*.psd
+*.pxcp
+*.mp3
+*.mp4
+**/reference
+**/node_modules
