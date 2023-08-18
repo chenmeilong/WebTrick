@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #angel {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./imgs/angel.gif" alt="" id="angel" />
+  <script>    
+    var angel = document.getElementById("angel");
+    // 分为定时器和时间戳两种方式，一般防抖节流都是使用lodash工具函数实现
+    // 节流：如果事件被频繁触发，节流能能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！
+
+    const task = function(e){
+      angel.style.top = e.pageY + 'px'
+      angel.style.left = e.pageX + 'px'
+      console.log('ok')
+      timer = null
+    }
+
+    // 基于时间戳
+    const throttle = function(task,wait){
+        let preTime =0,result
+        return function(...args){
+          let now = +new Date()
+          if(now - preTime  > wait){
+            preTime  = now
+            result = task.call(this,...args)
+          }
+          return result
+        }
+    }
+
+    // 基于定时器
+    // const throttle = function(task,wait){
+    //     let timer = null,result
+    //     return function(...args){
+    //       let _this = this
+    //       if(!timer){
+    //         timer = setTimeout(function(){
+    //           task.call(_this,...args)
+    //           timer = null
+    //         },wait)
+    //       }
+    //       return result
+    //     }
+    // }
+
+    var timer = null  //定义节流阀
+    addEventListener('mousemove',throttle(task,16))
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">0</button>
+    <script>
+        let count = 0
+        let btn = document.getElementById("btn")
+        function add(){
+            this.innerHTML = ++count
+        }
+        function debounce(fn,wait){
+            var timeout,result
+            return function(){
+                let args = [...arguments]
+
+                clearTimeout(timeout)
+                timeout = setTimeout(()=>{
+                    result = fn.apply(this,args)
+                },wait)
+                return result
+            }
+        }
+        btn.addEventListener('click',debounce(add,1000))
+        
+    </script>
+</body>
+</html>

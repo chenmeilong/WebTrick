@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    li {
+      list-style: none;
+    }
+    .slides {
+        margin: 50px auto;
+        height: 270px;
+        width: 480px;
+        position: relative;
+    }
+    .slides ul li {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: all .3s;
+    }
+    .slides li.active {
+      opacity: 1;
+    }
+    
+    .prev,.next {
+      position: absolute;
+      background-color: green;
+      top: 50%;
+    }
+    .slides  .prev{
+      left:0;
+    }
+    .slides .next{
+      right:0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slides">
+    <ul>
+      <li class="active"><a href="#"><img src="./imgs/1.jpg"></a></li>
+      <li><a href="#"><img src="./imgs/2.jpg"></a></li>
+      <li><a href="#"><img src="./imgs/3.jpg"></a></li>
+      <li><a href="#"><img src="./imgs/4.jpg"></a></li>
+      <li><a href="#"><img src="./imgs/5.jpg"></a></li>
+      <li><a href="#"><img src="./imgs/6.jpg"></a></li>
+      <li><a href="#"><img src="./imgs/7.jpg"></a></li>
+    </ul>
+    <a class="prev" href="javascript:;">《</a>
+    <a class="next" href="javascript:;">》</a>
+  </div>
+  <script>
+    let piclis = document.querySelectorAll('.slides ul li')
+    let next = document.querySelector('.next')
+    let prev = document.querySelector('.prev')
+
+    let index = 0  
+    next.addEventListener('click', function () {
+      index++
+      index = index % piclis.length
+      common()
+    })
+    prev.addEventListener('click', function () {
+      index--
+      if (index < 0) {
+        index = piclis.length - 1
+      }
+      common()
+    })
+    function common() {
+      document.querySelector('.slides ul .active').classList.remove('active')
+      piclis[index].classList.add('active')
+    }
+  </script>
+</body>
+</html>

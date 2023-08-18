@@ -12,14 +12,24 @@
   <input id="ipt" type="text" class="ipt" placeholder="请输入要搜索的内容" />
   <script>
     // 防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面N多次的触发都会被忽略！
+    const deBounce = function(func,wait){
+      let timer,result
+      return function(...args){
+          clearTimeout(timer)
+          timer = setTimeout(()=>{
+            result = func.call(this,...args)
+          },wait)
+          return result
+      }
+    }
+
+    const task = function(){
+      console.log(this);
+      return 'return request'
+    }
+
     let input = document.querySelector('#ipt')
-    let timer = null
-    input.addEventListener('keyup',function(){
-        clearTimeout(timer)
-        timer = setTimeout(()=>{
-            console.log('请求');
-        },500)
-    })
+    input.addEventListener('keyup',deBounce(task,1000))
   </script>
 </body>
 </html>

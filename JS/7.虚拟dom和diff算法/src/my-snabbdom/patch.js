@@ -17,7 +17,6 @@ export default function patch(oldVnode, newVnode) {
   if (!oldVnode.sel) {
     // 转为虚拟DOM
     oldVnode = emptyNodeAt(oldVnode)
-    console.log(oldVnode);
   }
   // 判断 oldVnode 和 newVnode 是否为同一虚拟节点
   // 通过 key 和 sel 进行判断

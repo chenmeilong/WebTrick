@@ -5,20 +5,16 @@ class Subject {
   }
   // 添加观察者
   addObs(obs) {
-    // 判断观察者是否有 和 存在更新订阅的方法
     if (obs && obs.update) {
-      // 添加到观察者列表中
       this.observerLists.push(obs)
     }
   }
   // 通知观察者
   notify() {
     this.observerLists.forEach((obs) => {
-      // 每个观察者收到通知后 会更新事件
       obs.update()
     })
   }
-  // 清空观察者
   empty() {
     this.observerLists = []
   }
