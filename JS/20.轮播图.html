@@ -1,86 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>轮播图</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    li {
-      list-style: none;
-    }
-    .slides {
-        margin: 50px auto;
-        height: 270px;
-        width: 480px;
-        position: relative;
-    }
-    .slides ul li {
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: all .3s;
-    }
-    .slides li.active {
-      opacity: 1;
-    }
-    
-    .prev,.next {
-      position: absolute;
-      background-color: green;
-      top: 50%;
-    }
-    .slides  .prev{
-      left:0;
-    }
-    .slides .next{
-      right:0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .box{
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            border: 3px solid #000;
+        }
+        .box ul{
+            margin: 0;
+            padding: 0;
+        }
+        .box li{
+            position: absolute;
+            top:0;
+            left:0;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+        .box li.active{
+            opacity: 1;
+        }
+        .box .divimg{
+            width: 300px;
+            height: 200px;
+            font-size: 50px;
+            line-height: 200px;
+            text-align: center;
+        }
+        .box a{
+            position: absolute;
+            top: 50%;
+        }
+        .box .left{
+            left: 0;
+        }
+        .box .right{
+            right:0;
+        }
+
+    </style>
 </head>
-
 <body>
-  <div class="slides">
-    <ul>
-      <li class="active"><a href="#"><img src="./imgs/1.jpg"></a></li>
-      <li><a href="#"><img src="./imgs/2.jpg"></a></li>
-      <li><a href="#"><img src="./imgs/3.jpg"></a></li>
-      <li><a href="#"><img src="./imgs/4.jpg"></a></li>
-      <li><a href="#"><img src="./imgs/5.jpg"></a></li>
-      <li><a href="#"><img src="./imgs/6.jpg"></a></li>
-      <li><a href="#"><img src="./imgs/7.jpg"></a></li>
-    </ul>
-    <a class="prev" href="javascript:;">《</a>
-    <a class="next" href="javascript:;">》</a>
-  </div>
-  <script>
-    let piclis = document.querySelectorAll('.slides ul li')
-    let next = document.querySelector('.next')
-    let prev = document.querySelector('.prev')
-
-    let index = 0  
-    next.addEventListener('click', function () {
-      index++
-      index = index % piclis.length
-      common()
-    })
-    prev.addEventListener('click', function () {
-      index--
-      if (index < 0) {
-        index = piclis.length - 1
-      }
-      common()
-    })
-    function common() {
-      document.querySelector('.slides ul .active').classList.remove('active')
-      piclis[index].classList.add('active')
-    }
-  </script>
+    <div class="box">
+        <ul>
+            <li class="active"><div class="divimg" style="background-color: red;">1</div></li>
+            <li><div class="divimg" style="background-color: green;">2</div></li>
+            <li><div class="divimg" style="background-color: white">3</div></li>
+        </ul>
+        <a class="left" href="javascript:;">《</a>
+        <a class="right" href="javascript:;">》</a>
+    </div>
+    <script>
+      // 控制 opacity class 的轮播图，还有display visibility都可以实现 ，还有滑动效果的 基于absolute实现
+        let lis = document.querySelectorAll('.box li')
+        let left = document.querySelector('.left')
+        let right = document.querySelector('.right')
+        let index = 0
+        left.addEventListener('click',function(){
+            index--;
+            updata()
+        })
+        right.addEventListener('click',function(){
+            index++;
+            updata()
+        })
+        function updata(){
+            if(index>=lis.length) index = 0
+            if(index<0) index = lis.length-1
+            lis.forEach((li)=>{
+                li.classList.remove('active')
+            })
+            lis[index].classList.add('active')
+        }
+    </script>
 </body>
 </html>
