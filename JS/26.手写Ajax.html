@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 把外界传递过来的参数对象，转换为 查询字符串
+        function change(data){
+            let keys = Object.keys(data)
+            let res = []
+            keys.forEach((key)=>{
+                res.push(`${key}=${data[key]}`)
+            })
+            return res.join('&')
+        }
+        function Ajax(options){
+            let xhr = new XMLHttpRequest()
+            if(options.method==='GET'){
+                xhr.open('GET',options.url+'?'+change(options.data))
+                xhr.send()
+            }else{
+                xhr.open('POST',options.url)
+                xhr.send(JSON.stringify(options.data)) 
+            }
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState==4 && xhr.status==200){
+                    options.success(JSON.parse(xhr.responseText))
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <script>
+        Ajax({
+            method:'GET',
+            url:'http://XXXXX/getmethod',
+            data:{
+                a:1,
+                b:2
+            },
+            success:function(data){
+                console.log(data);
+            }
+        })
+        Ajax({
+            method:'POST',
+            url:'http://120.53.84.79:8887/image',
+            data:{index:0},
+            success:function(data){
+                console.log(data);
+            }
+        })
+    </script>
+</body>
+</html>
