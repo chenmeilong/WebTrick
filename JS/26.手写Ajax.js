@@ -1,0 +1,1 @@
+console.log('   xxx   _love_study_1.mp4'.replace(/\b/g, '❤️'))
