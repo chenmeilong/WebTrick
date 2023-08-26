@@ -1,4 +1,4 @@
-// 目前有点小问题 出错无法使用try catch捕获到直接报错了 感觉是promise的bug
+// 目前有点小问题 出错无法使用try catch捕获到直接报错了 感觉是promise的bug；
 
 function asyncReq(task){
     return new Promise(function(resolve,reject){
