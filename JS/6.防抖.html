@@ -11,7 +11,7 @@
 <body>
   <input id="ipt" type="text" class="ipt" placeholder="请输入要搜索的内容" />
   <script>
-    // 防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面N多次的触发都会被忽略！
+    // 防抖：如果事件被频繁触发，防抖能保证只有最后一次触发生效！前面N多次的触发都会被忽略！
     const deBounce = function(func,wait){
       let timer,result
       return function(...args){
@@ -30,6 +30,15 @@
 
     let input = document.querySelector('#ipt')
     input.addEventListener('keyup',deBounce(task,1000))
+
+    //甚至可以不用HTML绑定事件，直接可以这样
+    // let a = deBounce((...args)=>{console.log(args);},1000)
+    // a(1)
+    // a(2)
+    // a(3)
+    // setTimeout(()=>{
+    //     a(4)
+    // },2000)
   </script>
 </body>
 </html>
