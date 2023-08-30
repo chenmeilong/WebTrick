@@ -1,6 +1,7 @@
 
 // 方法1：使用URLSearchParams 解析  只能解析查询字符串  能帮我们处理好URL编码问题
 // const params = new URLSearchParams("q=%E4%BD%A0%E5%A5%BD&page=20");
+// // console.log(params);
 // console.log(params.get("q"));; // 'devpoint'
 // console.log(params.get("page"));; // '1'
 
@@ -31,4 +32,3 @@ function getQueryParams(url) {
     return params;
 }
 console.log(getQueryParams('https://stackabuse.com/search?q=%E4%BD%A0%E5%A5%BD&page=20'));
-
