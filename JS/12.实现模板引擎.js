@@ -4,7 +4,7 @@ const str = `<div>姓名：{{name}}</div>
 <div>住址：{{address  }}</div>`
 
 function template(str, data) {
-    var pattern = /{{\s*([a-zA-Z]+)\s*}}/
+    var pattern = /{{\s*(\w+)\s*}}/
     var pattResult = null
     while (pattResult = pattern.exec(str)) {
       str = str.replace(pattResult[0], data[pattResult[1]])
