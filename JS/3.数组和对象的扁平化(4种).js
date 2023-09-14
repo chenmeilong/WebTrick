@@ -36,7 +36,7 @@ console.log([...flatten(arr)]); // [1, 2, 3, 4, 5, 6]
 //对象扁平化
 const objFlat = (obj)=>{
     let flatobj = {}
-    for(let key in obj){
+    for(let key of Object.keys(obj)){
         if(obj[key] instanceof Object){
             Object.assign(flatobj,objFlat(obj[key]))
         }else{

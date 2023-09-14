@@ -80,5 +80,13 @@ Function.prototype.myBind = function(context, ...args) {
         return _this.apply(context, [...args, ...innerArgs]);
     };
 };
+// 简易版
+// Function.prototype.myBind = function(context, ...args) {
+//     context = context || window
+//     const _this = this
+//     return function fn(...innerArgs) {
+//         return _this.apply(context, [...args, ...innerArgs]);
+//     };
+// };
 print.myBind(obj1)(1,2);
 print.myBind(obj2)(2,3);

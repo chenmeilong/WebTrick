@@ -1,4 +1,4 @@
-const str = `<div>姓名：{{name}}</div>
+let str = `<div>姓名：{{name}}</div>
 <div>年龄：{{ age }}</div>
 <div>性别：{{  gender}}</div>
 <div>住址：{{address  }}</div>`
