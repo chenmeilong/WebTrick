@@ -21,7 +21,6 @@ class MyPromise {
         this.status = FULFILLED;
         this.value = val;
     }
-
     //失败的回调
     reject = (reason) => {
         if(this.status != PENDING) return
@@ -31,7 +30,6 @@ class MyPromise {
     then = (onRejected, onResolved) => {
         onRejected = typeof onRejected === 'function' ?onRejected : ()=>{};
         onResolved = typeof onResolved === 'function' ? onResolved : ()=>{};
-
         // 如果是等待状态，函数加入对应列表
         // if(this.status===PENDING){
         //     this.rejectedCallbacks.push(onRejected)
