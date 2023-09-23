@@ -28,5 +28,6 @@ const s2 = Object.create(s1, {
     },
 });
 
+
 console.log(s1);
 console.log(s2);
