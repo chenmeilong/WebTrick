@@ -1,54 +1,68 @@
-//先定义三个状态常量,这样可以避免在写代码期间维护字符串
-const PENDING = 'pending'
-const FULFILLED = 'fulfilled'
-const REJECTED = 'rejected'
+// 不支持链式调用 不支持异步链式调用
 
 class MyPromise {
-    //定义初始状态
-    status = PENDING;
-    //用来保存成功的值
-    value = null;
-    //用来保存失败的值
-    reason = null;
-    //构造器接收一个执行器方法,会在构造器内部立即执行,然后回传两个回调方法
-    constructor(executor){
-        executor(this.resolve,this.reject)
-    }
-    //成功的回调
-    resolve = (val) => {
-        //这里加判断的原因是因为promise的状态只会被修改一次,成功即成功,失败即失败
-        if(this.status != PENDING) return
-        this.status = FULFILLED;
-        this.value = val;
-    }
-    //失败的回调
-    reject = (reason) => {
-        if(this.status != PENDING) return
-            this.status = REJECTED;
-        this.reason = reason;
-    }
-    then = (onRejected, onResolved) => {
-        onRejected = typeof onRejected === 'function' ?onRejected : ()=>{};
-        onResolved = typeof onResolved === 'function' ? onResolved : ()=>{};
-        // 如果是等待状态，函数加入对应列表
-        // if(this.status===PENDING){
-        //     this.rejectedCallbacks.push(onRejected)
-        //     this.resolveCallbacks.push(onResolved)
-        // }
-        if(this.status === FULFILLED) {
-            onResolved(this.value)
+    PENDING = 'pending';
+    RESOLVED = 'resolved';
+    REJECTED = 'rejected';
+
+    constructor (executor) {
+      this.status = this.PENDING;
+      // 用于保存 resolve 的值
+      this.value = null;
+      // 用于保存 reject 的值
+      this.reason = null;
+      // 用于保存 then 的成功回调
+      this.onFulfilled = null;
+      // 用于保存 then 的失败回调
+      this.onRejected = null;
+  
+      // executor 的 resolve 参数
+      // 用于改变状态 并执行 then 中的成功回调
+      let resolve = value => {
+        if(this.status == this.PENDING){
+            this.value = value;
+            this.status = this.RESOLVED
+            this.onFulfilled && this.onFulfilled(this.value);
         }
-        if(this.status === REJECTED) {
-            onRejected(this.value)
+      }
+  
+      // executor 的 reject 参数
+      // 用于改变状态 并执行 then 中的失败回调
+      let reject = reason => {
+        if(this.status == this.PENDING){
+            this.reason = reason;
+            this.status = this.REJECTED
+            this.onRejected && this.onRejected(this.reason);
         }
+      }
+      // 执行 executor 函数
+      // 将我们上面定义的两个函数作为参数 传入
+      // 有可能在 执行 executor 函数的时候会出错，所以需要 try catch 一下 
+      try {
+        executor(resolve, reject);
+      } catch(err) {
+        reject(err);
+      }
     }
-}
+  
+    // 定义 then 函数
+    // 并且将 then 中的参数复制给 this.onFulfilled 和 this.onRejected
+    then(onFulfilled, onRejected) {
+      this.onFulfilled = onFulfilled;
+      this.onRejected = onRejected;
+    }
+  }
+
 let p1 = new MyPromise((resolve, reject) => {
-    resolve(123)
+    setTimeout(() => {
+        resolve('成功了');
+    }, 1000);
 })
-console.log(p1)
-p1.then(res=>{
-    console.log('success '+res);
-}, reason=>{
-    console.log('failed '+reason);
+
+p1.then((data) => {
+    console.log(data);
+}, (err) => {
+    console.log(err);
 })
+
+console.log('###');
