@@ -7,10 +7,6 @@ class MyPromise {
 
     constructor (executor) {
       this.status = this.PENDING;
-      // 用于保存 resolve 的值
-      this.value = null;
-      // 用于保存 reject 的值
-      this.reason = null;
       // 用于保存 then 的成功回调
       this.onFulfilled = null;
       // 用于保存 then 的失败回调
@@ -20,9 +16,8 @@ class MyPromise {
       // 用于改变状态 并执行 then 中的成功回调
       let resolve = value => {
         if(this.status == this.PENDING){
-            this.value = value;
             this.status = this.RESOLVED
-            this.onFulfilled && this.onFulfilled(this.value);
+            this.onFulfilled && this.onFulfilled(value);
         }
       }
   
@@ -30,9 +25,8 @@ class MyPromise {
       // 用于改变状态 并执行 then 中的失败回调
       let reject = reason => {
         if(this.status == this.PENDING){
-            this.reason = reason;
             this.status = this.REJECTED
-            this.onRejected && this.onRejected(this.reason);
+            this.onRejected && this.onRejected(reason);
         }
       }
       // 执行 executor 函数
