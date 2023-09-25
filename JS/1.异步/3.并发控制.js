@@ -15,7 +15,7 @@ function randomRequest(url){
             else reject({state:'error'}) 
         },delay)
     })
-  }
+}
 
 // 稍微修改下可以改为异步任务调度器
 // 并发请求函数
@@ -60,7 +60,7 @@ const controlAsync = (urls, maxNum) => {
         }
     })
 }
-
+// 注意 不要把promise放在数组中去调度
 const urls = [];
 for (let i = 1; i <= 20; i++) {
     urls.push(`https://xxx.xx/api/${i}`);
