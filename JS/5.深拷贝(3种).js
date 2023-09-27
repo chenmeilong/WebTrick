@@ -14,7 +14,7 @@ function deepCopy(target, isCopy = new Map()) {
     // 循环引用直接返回
     if (isCopy.get(target))  return isCopy.get(target);
     // 正则拷贝
-    if(target instanceof RegExp) return new RegExp(obj)
+    if(target instanceof RegExp) return new RegExp(target)
     let res = target instanceof Array ? [] : {};
     isCopy.set(target, res);
     for (const key of Object.keys(target)) {
