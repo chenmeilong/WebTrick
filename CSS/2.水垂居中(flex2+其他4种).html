@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
         /* 公共代码 */
-        .wp {
+        .father {
             border: 1px solid red;
             width: 300px;
             height: 300px;
@@ -17,14 +17,14 @@
         /* 公共代码 */
 
         /* 方法5 flex 目前在移动端已经完全可以使用flex了，PC端需要看自己业务的兼容性情况 */
-        /* .wp {
+        /* .father {
             display: flex;
             justify-content: center;
             align-items: center;
         } */
 
         /* 方法6 flex 的另外一种写法*/
-        .wp {
+        .father {
             display: flex;
         }
         .box {
@@ -33,7 +33,7 @@
 
         /* 方法7 行内块 将父元素设置text-align: center；line-height: 300px;;子标签display: inline-block;vertical-align: middle;line-height: initial;*/
         /* 适用于行内块，利用了行内块和行内标签具有文本属性的特点 */
-        /* .wp {
+        /* .father {
             line-height: 300px;
             text-align: center;
         }
@@ -47,7 +47,7 @@
 
 
         /* 方法8 grid 但兼容性不如flex，不推荐使用 */
-        /* .wp {
+        /* .father {
             display: grid;
         }
         .box {
@@ -56,7 +56,7 @@
         } */
 
         /* 方法9 css-table  css新增的table属性，可以让我们把普通元素，变为table元素的现实效果，通过这个特性也可以实现水平垂直居中*/
-        /* .wp {
+        /* .father {
             display: table-cell;
             text-align: center;
             vertical-align: middle;
@@ -70,8 +70,8 @@
     </style>
 </head>
 <body>
-    <div class="wp">
-        <div class="box">123千万千万千万123</div>
+    <div class="father">
+        <div class="box">content</div>
     </div>    
 </body>
 </html>

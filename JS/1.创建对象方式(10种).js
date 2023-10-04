@@ -1,14 +1,14 @@
 // 方式1 new Object 方式
-// const obj1 = new Object({name: '小明',age: 18})
+// const obj1 = new Object({name: 'wayne',age: 18})
   
 // 方式2 大括号简写方式
-// const obj2 = {name: '小明',age: 18}
+// const obj2 = {name: 'wayne',age: 18}
 
 // 方式3 工厂函数方式
 // function createPerson(name, age) {
 // 	return {name,age,}
 // }
-// const obj3 = createPerson('小明', 18)
+// const obj3 = createPerson('wayne', 18)
 
 // 前三种都一样 本质都是new Object  无法根据对象的原型对象准确判断对象的类型​
 
@@ -21,7 +21,7 @@
 //         console.log(this.name, this.age)
 //     }
 // }
-// const obj4 = new Person('小明', 18)
+// const obj4 = new Person('wayne', 18)
 
 // 方式5 原型对象方式
 // 将共同的方法放到原型当中可以避免重新创建相同功能的方法，减少了内存的使用。
@@ -36,10 +36,10 @@
 // // 这里使用的是原型上的属性
 // xiaoming.getInfo() // "这个人很懒，没有名字", 1
 // // 添加自身属性
-// xiaoming.name = '小明'
+// xiaoming.name = 'wayne'
 // xiaoming.age = 18
 // // 使用自身属性
-// xiaoming.getInfo() // "小明", 18
+// xiaoming.getInfo() // "wayne", 18
 
 
 
@@ -67,8 +67,8 @@
 //   }
 // }
 // // 第一次调用时会给 Person.prototype 添加 getInfo 方法
-// const xiaoming = new Person("小明", 18) 
-// const xiaoguang = new Person("小光", 15)
+// const xiaoming = new Person("wayne", 18) 
+// const xiaoguang = new Person("jack", 15)
 
 
 
@@ -87,8 +87,8 @@
 //   p.lang = lang
 //   return p
 // }
-// const xiaoming = Programmer("小明", 18, "JavaScript")
-// const xiaoguang = Programmer("小光", 15, "C++")
+// const xiaoming = Programmer("wayne", 18, "JavaScript")
+// const xiaoguang = Programmer("jack", 15, "C++")
 
 // 方式9  class ES6语法糖
 // class Person {
@@ -100,7 +100,7 @@
 //   	console.log(this.name, this.age)
 //   }
 // }
-// const xiaoming = new Person("小明", 18)
+// const xiaoming = new Person("wayne", 18)
 
 
 // 方式10 闭包  利用闭包的特性，也可以实现创建对象的方式。 
@@ -118,11 +118,11 @@ function Person(name, age) {
       }
     }
 }
-const xiaoming = Person("小明", 18)
-const xiaoguang = Person("小光", 15)
-console.log(xiaoming.getName()) // 小明
-console.log(xiaoguang.getName()) // 小光
+const xiaoming = Person("wayne", 18)
+const xiaoguang = Person("jack", 15)
+console.log(xiaoming.getName()) // wayne
+console.log(xiaoguang.getName()) // jack
 
-xiaoming.setName("伪装成小光的小明")
-console.log(xiaoming.getName()) // 伪装成小光的小明
+xiaoming.setName("伪装成jack的wayne")
+console.log(xiaoming.getName()) // 伪装成jack的wayne
   
