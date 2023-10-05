@@ -11,6 +11,7 @@ function reactive(target) {
         get(target, key, receiver) {
             console.log(`获取对象属性${key}值`)
             // 收集依赖
+            console.log(target, key,'##');
             track(target, key)
 
             const result = Reflect.get(target, key, receiver)
