@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        ul,li{
+            padding: 0;
+            margin: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .box{
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 100px;
+            overflow: hidden;
+        }
+        .red,.green,.blue{
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+            transition: all 1s;
+        }
+        .red{
+            background-color: red;
+        }
+        .green{
+            background-color: green;
+        }
+        .blue{
+            background-color: blue;
+        }
+        .left,.right{
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 30px;
+        }
+        .left{
+            left:0
+        }
+        .right{
+            right:0
+        }
+        .activate{
+            /* display: block; */
+            opacity: 1;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <div class="red activate">1</div>
+                <div class="green">2</div>
+                <div class="blue">3</div>
+            </li>
+        </ul>
+        <button class="left">《</button>
+        <button class="right">》</button>
+    </div>
+
+    <script>
+        let left = document.querySelector('.left')
+        let right = document.querySelector('.right')
+        let arr = document.querySelectorAll('.box ul li div')
+        let index = 0
+        left.addEventListener('click',()=>{
+            index--
+            if(index<0) index= arr.length-1
+            arr.forEach((tab,i)=>{
+                tab.classList.remove('activate')
+                if(i===index) tab.classList.add('activate')
+            })
+        })
+        right.addEventListener('click',()=>{
+            index++
+            if(index>=arr.length) index = 0
+            arr.forEach((tab,i)=>{
+                tab.classList.remove('activate')
+                if(i===index) tab.classList.add('activate')
+            })
+        })
+    </script>
+</body>
+</html>
