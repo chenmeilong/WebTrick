@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        const PENDING = "pending";
+const PENDING = "pending";
 const FULFILLED = "fulfilled";
 const REJECTED = "rejected";
 
@@ -82,7 +73,8 @@ class MyPromise {
           //   循环引用判断 + 递归终止条件 + try读取then + thenable递归调用
           resolvePromise(p2, x, __resolve, __reject);
         } catch (err) {
-          // 4.3 如果回调函数执行出错了，就reject p2
+          // 4.3 如果回调函数执行出错了，就reject p2  
+        //   注意如果then没reject处理回调 前面执行失败了，就会触发这个条件，就是所有的穿透效果
           __reject(err);
         }
       });
@@ -173,20 +165,38 @@ function resolvePromise(p2, x, resolve, reject) {
 // p1.then(cb1)里，当cb1的类型不是函数时，p1会透传之前的px实例的返回值
 // new MyPromise((resolve) => {setTimeout(()=>{resolve(1)},2000)}).then(2).then(MyPromise.resolve(3)).then(val=>console.log(val))
 // 注意 这两种不一样
-// MyPromise.resolve(1).then(2).then(MyPromise.resolve(3)).then(val=>console.log(val))
+MyPromise.resolve(1).then(2).then(MyPromise.resolve(3)).then(val=>console.log(val))
 
-// 为什么会一直链式调用，而catch只调用最前面的那一个，切catch后面的then会被继续调用
-new MyPromise((resolve,reject) => {setTimeout(()=>{reject(1)},2000)}).then(() => {
-    return new Error('error了')
-  }).then(res => {
-    console.log("then1: ", res)
-  }).catch(err => {
-    console.log("catch1: ", err)
-  }).catch(err => {
-    console.log("catch2: ", err)
-  }).then(res => {
-    console.log("then2: ", res)
-  })
-    </script>
-</body>
-</html>
+// 为什么会一直链式调用，而catch只调用最前面的那一个，因为链式调用
+// reject如果为空也会出现穿透，直到遇见reject的处理function
+// 后面的then、catch的执行取决于前面的promise的状态是什么，catch执行后的状态是resolve
+// new MyPromise((resolve,reject) => {setTimeout(()=>{reject(1)},2000)}).then(() => {
+//     return new Error('error了')
+//   }).then(res => {
+//     console.log("then1: ", res)
+//   }).catch(err => {
+//     console.log("catch1: ", err)
+//     return 3
+//   }).catch(err => {
+//     console.log("catch2: ", err)
+//   }).then(res => {
+//     console.log("then2: ", res)
+//   })
+// catch1:  1
+// then2:  3
+
+
+// p1.then(cb1)中的 cb1出错时，会被默认catch住 + 此时p1是rejected状态
+// const p0 = new MyPromise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve('success')
+//     }, 1000)
+//   })
+// const p1 = p0.then(() => {
+// throw new Error('error了')
+// })
+// setTimeout(() => {
+// console.log('p0', p0)
+// console.log('p1', p1)
+// // p1 Promise {<rejected>: Error: error了
+// }, 2000)
