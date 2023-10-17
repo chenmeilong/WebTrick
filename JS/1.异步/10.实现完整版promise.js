@@ -105,9 +105,9 @@ class MyPromise {
   }
   finally(cb) {
     return this.then(
-      (value) => Promise.resolve(cb()).then(() => value),
+      (value) => MyPromise.resolve(cb()).then(() => value),
       (err) =>
-        Promise.resolve(cb()).then(() => {
+        MyPromise.resolve(cb()).then(() => {
           throw err;
         })
     );
@@ -165,7 +165,7 @@ function resolvePromise(p2, x, resolve, reject) {
 // p1.then(cb1)里，当cb1的类型不是函数时，p1会透传之前的px实例的返回值
 // new MyPromise((resolve) => {setTimeout(()=>{resolve(1)},2000)}).then(2).then(MyPromise.resolve(3)).then(val=>console.log(val))
 // 注意 这两种不一样
-MyPromise.resolve(1).then(2).then(MyPromise.resolve(3)).then(val=>console.log(val))
+// MyPromise.resolve(1).then(2).then(MyPromise.resolve(3)).then(val=>console.log(val))
 
 // 为什么会一直链式调用，而catch只调用最前面的那一个，因为链式调用
 // reject如果为空也会出现穿透，直到遇见reject的处理function
@@ -200,3 +200,14 @@ MyPromise.resolve(1).then(2).then(MyPromise.resolve(3)).then(val=>console.log(va
 // console.log('p1', p1)
 // // p1 Promise {<rejected>: Error: error了
 // }, 2000)
+
+
+// 注意：finally的res始终为undefined且将前面的resolve给到finally的resolve
+const p1 = new MyPromise((resolve) => {
+    resolve('resovle1');
+  }).then(res => {
+    console.log(res)
+    return 3
+  }).finally(res => {
+    console.log('finally', res)
+  })
